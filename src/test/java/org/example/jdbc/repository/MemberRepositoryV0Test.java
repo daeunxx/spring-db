@@ -4,7 +4,6 @@ import static org.assertj.core.api.Assertions.*;
 
 import java.sql.SQLException;
 import lombok.extern.slf4j.Slf4j;
-import org.assertj.core.api.Assertions;
 import org.example.jdbc.domain.Member;
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +16,7 @@ class MemberRepositoryV0Test {
   void crud() throws SQLException {
 
     //save
-    Member member = new Member("memberV0", 10000);
+    Member member = new Member("memberV1", 10000);
     repository.save(member);
 
     //findById
@@ -26,5 +25,10 @@ class MemberRepositoryV0Test {
     log.info("member == findMember {}", member == findMember);
     log.info("member equals findMember {}", member.equals(findMember));
     assertThat(findMember).isEqualTo(member);
+
+    //update money:10000 -> 20000
+    repository.update(member.getMemberId(), 20000);
+    Member updatedMember = repository.findById(member.getMemberId());
+    assertThat(updatedMember.getMoney()).isEqualTo(20000);
   }
 }
