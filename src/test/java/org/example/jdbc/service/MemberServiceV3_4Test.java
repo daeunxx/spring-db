@@ -12,7 +12,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.example.jdbc.domain.Member;
 import org.example.jdbc.repository.MemberRepositoryV3;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.aop.support.AopUtils;
@@ -20,16 +19,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
-import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.transaction.PlatformTransactionManager;
 
 /**
- * 트랜잭션 - @Transactional AOP
+ * 트랜잭션 - @Transactional: TransactionManager, DataSource 자동 등록
  */
 @Slf4j
 @SpringBootTest
-class MemberServiceV3_3Test {
+class MemberServiceV3_4Test {
 
   public static final String MEMBER_A = "memberA";
   public static final String MEMBER_B = "memberB";
@@ -42,19 +39,16 @@ class MemberServiceV3_3Test {
 
   @TestConfiguration
   static class TestConfig {
-    @Bean
-    DataSource dataSource() {
-      return new DriverManagerDataSource(URL, USERNAME, PASSWORD);
-    }
 
-    @Bean
-    PlatformTransactionManager transactionManager() {
-      return new DataSourceTransactionManager();
+    private final DataSource dataSource;
+
+    TestConfig(DataSource dataSource) {
+      this.dataSource = dataSource;
     }
 
     @Bean
     MemberRepositoryV3 memberRepository() {
-      return new MemberRepositoryV3(dataSource());
+      return new MemberRepositoryV3(dataSource);
     }
 
     @Bean
