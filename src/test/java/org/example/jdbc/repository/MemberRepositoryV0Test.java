@@ -3,6 +3,7 @@ package org.example.jdbc.repository;
 import static org.assertj.core.api.Assertions.*;
 
 import java.sql.SQLException;
+import java.util.NoSuchElementException;
 import lombok.extern.slf4j.Slf4j;
 import org.example.jdbc.domain.Member;
 import org.junit.jupiter.api.Test;
@@ -33,6 +34,7 @@ class MemberRepositoryV0Test {
 
     //repository
     repository.delete(member.getMemberId());
-    assertThatThrownBy(() -> repository.findById(member.getMemberId()));
+    assertThatThrownBy(() -> repository.findById(member.getMemberId())).isInstanceOf(
+        NoSuchElementException.class);
   }
 }

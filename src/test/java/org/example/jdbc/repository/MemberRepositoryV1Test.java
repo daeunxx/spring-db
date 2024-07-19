@@ -7,11 +7,9 @@ import static org.example.jdbc.connection.ConnectionConst.*;
 import com.zaxxer.hikari.HikariDataSource;
 import java.sql.SQLException;
 import lombok.extern.slf4j.Slf4j;
-import org.example.jdbc.connection.ConnectionConst;
 import org.example.jdbc.domain.Member;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 @Slf4j
 class MemberRepositoryV1Test {

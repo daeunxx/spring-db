@@ -8,7 +8,6 @@ import java.sql.Statement;
 import java.util.NoSuchElementException;
 import javax.sql.DataSource;
 import lombok.extern.slf4j.Slf4j;
-import org.example.jdbc.connection.DBConnectionUtil;
 import org.example.jdbc.domain.Member;
 import org.springframework.jdbc.support.JdbcUtils;
 
