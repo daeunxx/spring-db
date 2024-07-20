@@ -12,7 +12,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.example.jdbc.domain.Member;
 import org.example.jdbc.repository.MemberRepositoryV3;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.aop.support.AopUtils;
@@ -49,7 +48,7 @@ class MemberServiceV3_3Test {
 
     @Bean
     PlatformTransactionManager transactionManager() {
-      return new DataSourceTransactionManager();
+      return new DataSourceTransactionManager(dataSource());
     }
 
     @Bean
