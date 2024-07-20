@@ -1,10 +1,8 @@
 package org.example.jdbc.exception;
 
-import java.net.ConnectException;
 import java.sql.SQLException;
 import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.api.Assertions;
-import org.example.jdbc.exception.CheckedAppTest.NetworkClient;
 import org.junit.jupiter.api.Test;
 
 @Slf4j

@@ -2,9 +2,6 @@ package org.example.jdbc.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.example.jdbc.connection.ConnectionConst.PASSWORD;
-import static org.example.jdbc.connection.ConnectionConst.URL;
-import static org.example.jdbc.connection.ConnectionConst.USERNAME;
 
 import java.sql.SQLException;
 import javax.sql.DataSource;
@@ -19,7 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 /**
  * 트랜잭션 - @Transactional: TransactionManager, DataSource 자동 등록
@@ -66,7 +62,7 @@ class MemberServiceV3_4Test {
 
   @Test
   void aopCheck() {
-    log.info("memberServer class={}", memberService.getClass());
+    log.info("memberService class={}", memberService.getClass());
     log.info("memberRepository class={}", memberRepository.getClass());
 
     assertThat(AopUtils.isAopProxy(memberService)).isTrue();
