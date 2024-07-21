@@ -15,9 +15,14 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
+/**
+ * JdbcTemplate
+ */
 @Slf4j
+@Repository
 public class JdbcTemplateItemRepositoryV1 implements ItemRepository {
 
   private final JdbcTemplate template;
@@ -41,7 +46,7 @@ public class JdbcTemplateItemRepositoryV1 implements ItemRepository {
       return ps;
     }, keyHolder);
 
-    long key = keyHolder.getKey().longValue();
+    Long key = keyHolder.getKey().longValue();
     item.setId(key);
     return item;
   }
@@ -84,7 +89,7 @@ public class JdbcTemplateItemRepositoryV1 implements ItemRepository {
     boolean andFlag = false;
 
     if (StringUtils.hasText(itemName)) {
-      sql += " item_name like concat('%', ? '%')";
+      sql += " item_name like concat('%', ?, '%')";
       param.add(itemName);
       andFlag = true;
     }
