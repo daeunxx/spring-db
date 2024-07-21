@@ -16,6 +16,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.BadSqlGrammarException;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.jdbc.support.SQLErrorCodeSQLExceptionTranslator;
+import org.springframework.jdbc.support.SQLExceptionTranslator;
 
 @Slf4j
 public class SpringExceptionTranslatorTest {
@@ -52,8 +53,7 @@ public class SpringExceptionTranslatorTest {
       PreparedStatement pstmt = con.prepareStatement(sql);
       pstmt.executeQuery();
     } catch (SQLException e) {
-      SQLErrorCodeSQLExceptionTranslator exTranslator = new SQLErrorCodeSQLExceptionTranslator(
-          dataSource);
+      SQLExceptionTranslator exTranslator = new SQLErrorCodeSQLExceptionTranslator(dataSource);
       DataAccessException resultEx = exTranslator.translate("select", sql, e);
       log.info("resultEx", resultEx);
       assertThat(resultEx.getClass()).isEqualTo(BadSqlGrammarException.class);

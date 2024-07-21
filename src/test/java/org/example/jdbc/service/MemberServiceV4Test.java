@@ -8,7 +8,7 @@ import javax.sql.DataSource;
 import lombok.extern.slf4j.Slf4j;
 import org.example.jdbc.domain.Member;
 import org.example.jdbc.repository.MemberRepository;
-import org.example.jdbc.repository.MemberRepositoryV4_1;
+import org.example.jdbc.repository.MemberRepositoryV5;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -47,9 +47,9 @@ class MemberServiceV4Test {
 
     @Bean
     MemberRepository memberRepository() {
-      return new MemberRepositoryV4_1(dataSource);
+      //return new MemberRepositoryV4_1(dataSource);
       //return new MemberRepositoryV4_2(dataSource);
-      //return new MemberRepositoryV5(dataSource);
+      return new MemberRepositoryV5(dataSource);
     }
 
     @Bean
