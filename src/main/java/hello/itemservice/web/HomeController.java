@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequiredArgsConstructor
 public class HomeController {
 
-    @RequestMapping("/")
-    public String home() {
-        return "redirect:/items";
-    }
+  @RequestMapping("/")
+  public String home() {
+    return "redirect:/items";
+  }
 }

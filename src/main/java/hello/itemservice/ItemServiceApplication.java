@@ -13,14 +13,14 @@ import org.springframework.context.annotation.Profile;
 @SpringBootApplication(scanBasePackages = "hello.itemservice.web")
 public class ItemServiceApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(ItemServiceApplication.class, args);
-	}
+  public static void main(String[] args) {
+    SpringApplication.run(ItemServiceApplication.class, args);
+  }
 
-	@Bean
-	@Profile("local")
-	public TestDataInit testDataInit(ItemRepository itemRepository) {
-		return new TestDataInit(itemRepository);
-	}
+  @Bean
+  @Profile("local")
+  public TestDataInit testDataInit(ItemRepository itemRepository) {
+    return new TestDataInit(itemRepository);
+  }
 
 }

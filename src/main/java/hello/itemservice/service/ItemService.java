@@ -9,11 +9,11 @@ import java.util.Optional;
 
 public interface ItemService {
 
-    Item save(Item item);
+  Item save(Item item);
 
-    void update(Long itemId, ItemUpdateDto updateParam);
+  void update(Long itemId, ItemUpdateDto updateParam);
 
-    Optional<Item> findById(Long id);
+  Optional<Item> findById(Long id);
 
-    List<Item> findItems(ItemSearchCond itemSearch);
+  List<Item> findItems(ItemSearchCond itemSearch);
 }
