@@ -93,4 +93,22 @@ public class MemberServiceTest {
     assertThat(memberRepository.findByUsername(username)).isNotEmpty();
     assertThat(logRepository.findMessage(username)).isNotEmpty();
   }
+
+  /**
+   * MemberService    @Transactional: ON
+   * MemberRepository @Transactional: ON
+   * LogRepository    @Transactional: ON Exception
+   */
+  @Test
+  void outerTxOn_fail() {
+    //given
+    String username = "로그예외_outerTxOn_fail";
+
+    //when
+    assertThatThrownBy(() -> memberService.joinV1(username)).isInstanceOf(RuntimeException.class);
+
+    //then: 모든 데이터 롤백
+    assertThat(memberRepository.findByUsername(username)).isEmpty();
+    assertThat(logRepository.findMessage(username)).isEmpty();
+  }
 }
