@@ -75,4 +75,22 @@ public class MemberServiceTest {
     assertThat(memberRepository.findByUsername(username)).isNotEmpty();
     assertThat(logRepository.findMessage(username)).isNotEmpty();
   }
+
+  /**
+   * MemberService    @Transactional: ON
+   * MemberRepository @Transactional: ON
+   * LogRepository    @Transactional: ON
+   */
+  @Test
+  void outerTxOn_success() {
+    //given
+    String username = "outerTxOn_success";
+
+    //when
+    memberService.joinV1(username);
+
+    //then: 모든 데이터 정상 저장
+    assertThat(memberRepository.findByUsername(username)).isNotEmpty();
+    assertThat(logRepository.findMessage(username)).isNotEmpty();
+  }
 }
