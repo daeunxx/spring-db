@@ -53,7 +53,26 @@ public class MemberServiceTest {
     assertThatThrownBy(() -> memberService.joinV1(username)).isInstanceOf(RuntimeException.class);
 
     //then
+    System.out.println("++++++" + memberRepository.findByUsername(username));
     assertThat(memberRepository.findByUsername(username)).isNotEmpty();
     assertThat(logRepository.findMessage(username)).isEmpty();
+  }
+
+  /**
+   * MemberService    @Transactional: ON
+   * MemberRepository @Transactional: OFF
+   * LogRepository    @Transactional: OFF
+   */
+  @Test
+  void singleTx() {
+    //given
+    String username = "singleTx";
+
+    //when
+    memberService.joinV1(username);
+
+    //then
+    assertThat(memberRepository.findByUsername(username)).isNotEmpty();
+    assertThat(logRepository.findMessage(username)).isNotEmpty();
   }
 }
