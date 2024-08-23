@@ -4,15 +4,13 @@ import hello.itemservice.domain.Item;
 import hello.itemservice.repository.ItemRepository;
 import hello.itemservice.repository.ItemSearchCond;
 import hello.itemservice.repository.ItemUpdateDto;
-import java.sql.PreparedStatement;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import javax.sql.DataSource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -75,7 +73,8 @@ public class JdbcTemplateItemRepositoryV2 implements ItemRepository {
     String sql = "select id, item_name, price, quantity from item where id = :id";
 
     try {
-      SqlParameterSource param = new MapSqlParameterSource("id", id);
+      Map<String, Object> param = Map.of("id", id);
+      //SqlParameterSource param = new MapSqlParameterSource("id", id);
       Item item = template.queryForObject(sql, param, itemRowMapper());
       return Optional.of(item);
     } catch (EmptyResultDataAccessException e) {
