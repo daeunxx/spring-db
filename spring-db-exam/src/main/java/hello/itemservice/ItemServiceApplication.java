@@ -3,6 +3,7 @@ package hello.itemservice;
 import hello.itemservice.config.JdbcTemplateV1Config;
 import hello.itemservice.config.JdbcTemplateV2Config;
 import hello.itemservice.config.JdbcTemplateV3Config;
+import hello.itemservice.config.MyBatisConfig;
 import hello.itemservice.config.V2Config;
 import hello.itemservice.repository.ItemRepository;
 import javax.sql.DataSource;
@@ -19,8 +20,8 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 //@Import(MemoryConfig.class)
 //@Import(JdbcTemplateV1Config.class)
 //@Import(JdbcTemplateV2Config.class)
-@Import(JdbcTemplateV3Config.class)
-//@Import(MyBatisConfig.class)
+//@Import(JdbcTemplateV3Config.class)
+@Import(MyBatisConfig.class)
 //@Import(JpaConfig.class)
 //@Import(SpringDataJpaConfig.class)
 //@Import(V2Config.class)

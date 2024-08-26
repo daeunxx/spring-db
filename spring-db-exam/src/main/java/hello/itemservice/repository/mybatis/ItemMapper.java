@@ -13,6 +13,7 @@ public interface ItemMapper {
 
   void save(Item item);
 
+  //파라미터가 2개 이상인 경우, @Param 사용
   void update(@Param("id") Long id, @Param("updateParam") ItemUpdateDto updatePram);
 
   Optional<Item> findById(Long id);
