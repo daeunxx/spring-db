@@ -5,6 +5,7 @@ import hello.itemservice.repository.ItemRepository;
 import hello.itemservice.repository.ItemSearchCond;
 import hello.itemservice.repository.ItemUpdateDto;
 import hello.itemservice.repository.v2.ItemQueryRepositoryV2;
+import hello.itemservice.repository.v2.ItemRepositoryV2;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
@@ -14,9 +15,9 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class ItemServiceV2 implements ItemService{
+public class ItemServiceV2 implements ItemService {
 
-  private final ItemRepository itemRepository;
+  private final ItemRepositoryV2 itemRepository;
   private final ItemQueryRepositoryV2 itemQueryRepository;
 
   @Override
