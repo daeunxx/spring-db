@@ -18,6 +18,7 @@ public class InternalCallV1Test {
 
   @Test
   void printProxy() {
+    //InternalCallV1Test$CallService$$SpringCGLIB$$0
     log.info("callService class={}", callService.getClass());
   }
 
@@ -33,6 +34,7 @@ public class InternalCallV1Test {
 
   @TestConfiguration
   static class InternalCallV1Config {
+
     @Bean
     CallService callService() {
       return new CallService();

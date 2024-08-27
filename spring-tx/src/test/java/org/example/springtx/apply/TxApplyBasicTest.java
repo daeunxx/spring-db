@@ -21,7 +21,7 @@ public class TxApplyBasicTest {
 
   @Test
   void proxyCheck() {
-    //BasicService$$SpringCGLIB
+    //TxApplyBasicTest$BasicService$$SpringCGLIB$$0
     log.info("aop class={}", basicService.getClass());
     assertThat(AopUtils.isAopProxy(basicService)).isTrue();
   }
@@ -34,6 +34,7 @@ public class TxApplyBasicTest {
 
   @TestConfiguration
   static class TxApplyBasicConfig {
+
     @Bean
     BasicService basicService() {
       return new BasicService();
