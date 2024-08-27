@@ -21,6 +21,8 @@ public class InitTxTest {
   @Test
   void go() {
     //초기화 코드는 스프링이 초기화 시점에 호출
+    //직접 호출하면 트랜잭션 적용
+    //hello.initV1();
   }
 
   @TestConfiguration
@@ -35,6 +37,7 @@ public class InitTxTest {
   @Slf4j
   static class Hello {
 
+    //초기화 코드가 먼저 실행되고 그 이후에 AOP 적용
     @PostConstruct
     @Transactional
     public void initV1() {
