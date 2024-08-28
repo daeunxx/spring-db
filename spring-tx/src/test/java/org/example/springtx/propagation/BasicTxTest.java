@@ -97,6 +97,21 @@ public class BasicTxTest {
   }
 
   @Test
+  void outer_only_commit() {
+    log.info("외부 트랜잭션 시작");
+    TransactionStatus outer = txManager.getTransaction(new DefaultTransactionAttribute());
+    log.info("outer.isNewTransaction()={}", outer.isNewTransaction());
+
+    log.info("내부 트랜잭션 시작");
+    TransactionStatus inner = txManager.getTransaction(new DefaultTransactionAttribute());
+    log.info("inner.isNewTransaction()={}", inner.isNewTransaction());
+
+    //처음 트랜잭션을 시작한 트랜잭션이 물리 트랜잭션 관리
+    log.info("외부 트랜잭션 커밋");
+    txManager.commit(outer);
+  }
+
+  @Test
   void outer_rollback() {
     log.info("외부 트랜잭션 시작");
     TransactionStatus outer = txManager.getTransaction(new DefaultTransactionAttribute());
