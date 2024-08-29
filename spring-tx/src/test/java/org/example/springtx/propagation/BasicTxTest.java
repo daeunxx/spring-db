@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.*;
 
 import javax.sql.DataSource;
 import lombok.extern.slf4j.Slf4j;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -153,7 +154,7 @@ public class BasicTxTest {
     log.info("outer.isNewTransaction()={}", outer.isNewTransaction());
 
     log.info("내부 트랜잭션 시작");
-    DefaultTransactionDefinition definition = new DefaultTransactionDefinition();
+    DefaultTransactionDefinition definition = new DefaultTransactionAttribute();
     definition.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRES_NEW);
 
     TransactionStatus inner = txManager.getTransaction(definition);
@@ -164,5 +165,45 @@ public class BasicTxTest {
 
     log.info("외부 트랜잭션 커밋");
     txManager.commit(outer);
+  }
+
+  @Test
+  void inner_rollback_requires_new2() {
+    log.info("외부 트랜잭션 시작");
+    TransactionStatus outer = txManager.getTransaction(new DefaultTransactionAttribute());
+    log.info("outer.isNewTransaction()={}", outer.isNewTransaction());
+
+    log.info("내부 트랜잭션 시작");
+    DefaultTransactionDefinition definition = new DefaultTransactionAttribute();
+    definition.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRES_NEW);
+
+    TransactionStatus inner = txManager.getTransaction(definition);
+    log.info("inner.isNewTransaction()={}", inner.isNewTransaction());
+
+    log.info("외부 트랜잭션 커밋");
+    txManager.commit(outer);
+
+    log.info("내부 트랜잭션 롤백");
+    assertThatThrownBy(() -> txManager.rollback(inner)).isInstanceOf(IllegalStateException.class);
+  }
+
+  @Test
+  void inner_rollback_requires_new3() {
+    log.info("외부 트랜잭션 시작");
+    TransactionStatus outer = txManager.getTransaction(new DefaultTransactionAttribute());
+    log.info("outer.isNewTransaction()={}", outer.isNewTransaction());
+
+    log.info("내부 트랜잭션 시작");
+    DefaultTransactionDefinition definition = new DefaultTransactionAttribute();
+    definition.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRES_NEW);
+
+    TransactionStatus inner = txManager.getTransaction(definition);
+    log.info("inner.isNewTransaction()={}", inner.isNewTransaction());
+
+    log.info("외부 트랜잭션 롤백");
+    txManager.rollback(outer);
+
+    log.info("내부 트랜잭션 롤백");
+    assertThatThrownBy(() -> txManager.rollback(inner)).isInstanceOf(IllegalStateException.class);
   }
 }
